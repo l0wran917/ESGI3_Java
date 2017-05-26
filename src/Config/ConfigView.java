@@ -17,6 +17,7 @@ public class ConfigView extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Configuration");
         this.setSize(360, 360);
+        this.setLocation(new Point(0, 0));
 
         this.setLayout(new BorderLayout());
 

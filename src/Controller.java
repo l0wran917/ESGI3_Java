@@ -1,17 +1,27 @@
+import Config.ConfigController;
+
 public class Controller {
-    public Controller()
-    {
-        Simulation sim = new Simulation(null, null, null, null);
+
+    public static void main(String[] args) {
+        ConfigController conf = new ConfigController();
+        new Controller();
+    }
+
+    public Controller() {
+        Simulation sim = new Simulation();
         Render rend = new Render();
-        while (true) {
+        boolean isRunning = true;
+
+        while (isRunning) {
             sim.nextStep();
             rend.paint(sim);
+
             try {
-                sim.nextStep();
-                rend.paint(sim);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
+
 }
