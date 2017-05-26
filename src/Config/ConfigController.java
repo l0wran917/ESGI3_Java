@@ -14,7 +14,7 @@ public class ConfigController {
     }
 
     public void startSimulation(Dimension d, int nbSourceFood, int nbAnts, int explorationSpeed) {
-        new Simulation(d, nbSourceFood, nbAnts, explorationSpeed);
+        //new Simulation(d, nbSourceFood, nbAnts, explorationSpeed); // TODO
         //System.out.println(d + " " + nbSourceFood + " " + nbAnts + " " + explorationSpeed);
     }
 
