@@ -1,24 +1,28 @@
+import Ant.Ant;
+
+import java.awt.*;
+import java.util.HashMap;
 import java.util.LinkedList;
 
+import Ant.Anthill;
+
 public class Simulation {
-    private World world;
     private LinkedList<Ant> ants;
-    private LinkedList<Pheromone> pheromones;
+    private HashMap<Point, Integer> pheromones;
     private Anthill anthill;
 
-    public Simulation(World world, LinkedList<Ant> ants, LinkedList<Pheromone> pheromones, Anthill anthill) {
-        this.world = world;
-        this.ants = ants;
-        this.pheromones = pheromones;
-        this.anthill = anthill;
-    }
+    public Simulation() {
+        this.ants = new LinkedList<Ant>();
+        this.pheromones = new HashMap<>();
+        this.anthill = new Anthill();
 
-    public World getWorld() {
-        return world;
-    }
-
-    public void setWorld(World world) {
-        this.world = world;
+        // Debug
+        this.ants.add(new Ant(new Point(0, 0)));
+        Ant ant = new Ant(new Point(10, 10));
+        ant.setHasFood(true);
+        this.ants.add(ant);
+        this.ants.add(new Ant(new Point(20, 20)));
+        this.ants.add(new Ant(new Point(30, 30)));
     }
 
     public LinkedList<Ant> getAnts() {
@@ -29,14 +33,6 @@ public class Simulation {
         this.ants = ants;
     }
 
-    public LinkedList<Pheromone> getPheromones() {
-        return pheromones;
-    }
-
-    public void setPheromones(LinkedList<Pheromone> pheromones) {
-        this.pheromones = pheromones;
-    }
-
     public Anthill getAnthill() {
         return anthill;
     }
@@ -45,8 +41,13 @@ public class Simulation {
         this.anthill = anthill;
     }
 
-    public void nextStep()
-    {
+    public void nextStep() {
+        this.moveAnts();
+    }
 
+    private void moveAnts(){
+        for(Ant ant : this.ants){
+            ant.move(1, 0);
+        }
     }
 }

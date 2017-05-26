@@ -1,6 +1,7 @@
 package Config;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ConfigController {
 
@@ -12,8 +13,9 @@ public class ConfigController {
         this.config = new ConfigModel();
     }
 
-    public void startSimulation(){
-        System.out.println("Start");
+    public void startSimulation(Dimension d, int nbSourceFood, int nbAnts, int explorationSpeed) {
+        //new Simulation(d, nbSourceFood, nbAnts, explorationSpeed); // TODO
+        //System.out.println(d + " " + nbSourceFood + " " + nbAnts + " " + explorationSpeed);
     }
 
 
