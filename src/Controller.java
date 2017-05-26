@@ -7,8 +7,7 @@ public class Controller {
             sim.nextStep();
             rend.paint(sim);
             try {
-                sim.nextStep();
-                rend.paint(sim);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
