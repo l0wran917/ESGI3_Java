@@ -1,13 +1,13 @@
 package Ant;
 
+import Main.Model;
+
 import java.awt.*;
 
-public class Anthill {
+public class Anthill extends Model {
 
-    private Point position;
-
-    public Anthill() {
-        this.position = new Point();
+    public Anthill(Point position) {
+        super(position);
+        this.view = new AnthillView(this);
     }
-
 }

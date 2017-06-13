@@ -10,7 +10,7 @@ public class AntView extends JPanel{
     public AntView(Ant ant){
         this.ant = ant;
 
-        this.setSize(10, 10);
+        this.setSize(20, 20);
         this.setLocation(ant.getPosition());
     }
 
@@ -18,7 +18,7 @@ public class AntView extends JPanel{
     protected void paintComponent(Graphics graphics) {
         this.setLocation(ant.getPosition());
 
-        graphics.fillOval(0, 0, 10, 10);
+        graphics.fillOval(0, 0, 12, 12);
         if(ant.getHasFood()){
             graphics.setColor(Color.red);
             graphics.fillOval(3, 3, 4, 4);

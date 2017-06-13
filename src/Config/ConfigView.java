@@ -30,13 +30,21 @@ public class ConfigView extends JFrame implements ActionListener {
         this.fieldsPanel = new JPanel();
         this.fieldsPanel.setLayout(new GridLayout(4, 1));
 
-        JPanel row = new JPanel(new FlowLayout());
-        JLabel label = new JLabel("Nombre de fourmis : ");
-        JTextField input = new JTextField(10);
+        JPanel rowAntCount = new JPanel(new FlowLayout());
+        JLabel labelAntCount = new JLabel("Nombre de fourmis : ");
+        JTextField inputAntCount = new JTextField(10);
+        rowAntCount.add(labelAntCount);
+        rowAntCount.add(inputAntCount);
+        this.fieldsPanel.add(rowAntCount);
 
-        this.fieldsPanel.add(row);
-        row.add(label);
-        row.add(input);
+        JPanel rowAnthillPosition = new JPanel(new FlowLayout());
+        JLabel labelAnthillPosition = new JLabel("Anthill (x;y) : ");
+        JTextField inputAnthillPositionX = new JTextField(10);
+        JTextField inputAnthillPositionY = new JTextField(10);
+        rowAnthillPosition.add(labelAnthillPosition);
+        rowAnthillPosition.add(inputAnthillPositionX);
+        rowAnthillPosition.add(inputAnthillPositionY);
+        this.fieldsPanel.add(rowAnthillPosition);
 
         this.add(this.fieldsPanel, BorderLayout.CENTER);
 
@@ -45,13 +53,15 @@ public class ConfigView extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent actionEvent) {
         String action = actionEvent.getActionCommand();
-        Dimension d = new Dimension(800, 80);
-        int nbSourceFood = 1000;
-        int nbAnts = 100;
+
+        Dimension windowSize = new Dimension(800, 600);
+        Point anthillPosition = new Point(375, 275);
+        int foodCount = 10;
+        int antsCount = 5;
         int explorationSpeed = 1000;
 
         if (action.equals(this.startAction)) {
-            this.controller.startSimulation(d, nbSourceFood, nbAnts, explorationSpeed);
+            this.controller.startSimulation(windowSize, anthillPosition, antsCount, foodCount);
         }
     }
 }

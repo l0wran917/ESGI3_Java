@@ -1,22 +1,21 @@
 package Ant;
 
+import Main.Model;
+
 import java.awt.*;
 
-public class Ant {
+public class Ant extends Model {
 
-    private Point position;
-    private AntView view;
     private boolean hasFood;
 
     public Ant(Point position) {
-        this.position = position;
+        super(position);
         this.view = new AntView(this);
         this.hasFood = false;
     }
 
-    public void move(int x, int y) {
-        this.position.x += x;
-        this.position.y += y;
+    public void move(IAntDeplacement behaviour) {
+        behaviour.move(this);
     }
 
     public void setHasFood(boolean hasFood) {
@@ -25,13 +24,5 @@ public class Ant {
 
     public boolean getHasFood() {
         return this.hasFood;
-    }
-
-    public AntView getView() {
-        return this.view;
-    }
-
-    public Point getPosition() {
-        return this.position;
     }
 }
