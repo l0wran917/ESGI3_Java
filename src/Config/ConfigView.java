@@ -10,6 +10,12 @@ public class ConfigView extends JFrame implements ActionListener {
     ConfigController controller;
     JPanel fieldsPanel;
 
+    JTextField inputAntCount;
+    JTextField inputAnthillPositionX;
+    JTextField inputAnthillPositionY;
+
+    JButton startBtn;
+
     public final String startAction = "start";
 
     public ConfigView(ConfigController controller) {
@@ -22,7 +28,7 @@ public class ConfigView extends JFrame implements ActionListener {
 
         this.setLayout(new BorderLayout());
 
-        JButton startBtn = new JButton("Start");
+        startBtn = new JButton("Start");
         startBtn.setActionCommand(this.startAction);
         startBtn.addActionListener(this);
         this.add(startBtn, BorderLayout.SOUTH);
@@ -32,15 +38,18 @@ public class ConfigView extends JFrame implements ActionListener {
 
         JPanel rowAntCount = new JPanel(new FlowLayout());
         JLabel labelAntCount = new JLabel("Nombre de fourmis : ");
-        JTextField inputAntCount = new JTextField(10);
+        inputAntCount = new JTextField(10);
+        inputAntCount.setText("5");
         rowAntCount.add(labelAntCount);
         rowAntCount.add(inputAntCount);
         this.fieldsPanel.add(rowAntCount);
 
         JPanel rowAnthillPosition = new JPanel(new FlowLayout());
         JLabel labelAnthillPosition = new JLabel("Anthill (x;y) : ");
-        JTextField inputAnthillPositionX = new JTextField(10);
-        JTextField inputAnthillPositionY = new JTextField(10);
+        inputAnthillPositionX = new JTextField(10);
+        inputAnthillPositionX.setText("350");
+        inputAnthillPositionY = new JTextField(10);
+        inputAnthillPositionY.setText("350");
         rowAnthillPosition.add(labelAnthillPosition);
         rowAnthillPosition.add(inputAnthillPositionX);
         rowAnthillPosition.add(inputAnthillPositionY);
@@ -55,13 +64,14 @@ public class ConfigView extends JFrame implements ActionListener {
         String action = actionEvent.getActionCommand();
 
         Dimension windowSize = new Dimension(800, 600);
-        Point anthillPosition = new Point(375, 275);
+        Point anthillPosition = new Point(Integer.parseInt(inputAnthillPositionX.getText()), Integer.parseInt(inputAnthillPositionY.getText()));
         int foodCount = 10;
-        int antsCount = 5;
+        int antsCount = Integer.parseInt(this.inputAntCount.getText());
         int explorationSpeed = 1000;
 
         if (action.equals(this.startAction)) {
             this.controller.startSimulation(windowSize, anthillPosition, antsCount, foodCount);
+            this.startBtn.setEnabled(false);
         }
     }
 }
