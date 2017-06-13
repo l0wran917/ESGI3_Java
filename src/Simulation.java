@@ -5,15 +5,16 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import Ant.Anthill;
+import Pheromone.Pheromone;
 
 public class Simulation {
     private LinkedList<Ant> ants;
-    private HashMap<Point, Integer> pheromones;
+    private HashMap<Point, Pheromone> pheromones;
     private Anthill anthill;
 
     public Simulation() {
         this.ants = new LinkedList<Ant>();
-        this.pheromones = new HashMap<>();
+        this.pheromones = new HashMap<Point, Pheromone>();
         this.anthill = new Anthill();
 
         // Debug
@@ -24,6 +25,8 @@ public class Simulation {
         this.ants.add(new Ant(new Point(20, 20)));
         this.ants.add(new Ant(new Point(30, 30)));
     }
+
+    public HashMap<Point, Pheromone> getPheromones()
 
     public LinkedList<Ant> getAnts() {
         return ants;
