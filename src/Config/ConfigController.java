@@ -1,5 +1,7 @@
 package Config;
 
+import Main.Controller;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,8 +15,16 @@ public class ConfigController {
         this.config = new ConfigModel();
     }
 
-    public void startSimulation(Dimension d, int nbSourceFood, int nbAnts, int explorationSpeed) {
-        //new Simulation(d, nbSourceFood, nbAnts, explorationSpeed); // TODO
+    public void startSimulation(Dimension windowsSize, Point antihillPosition, int antsCount, int foodCount) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new Controller(windowsSize, antihillPosition, antsCount, foodCount);
+            }
+        }).start();
+
+        //new Main.Simulation(d, nbSourceFood, nbAnts, explorationSpeed); // TODO
         //System.out.println(d + " " + nbSourceFood + " " + nbAnts + " " + explorationSpeed);
     }
 

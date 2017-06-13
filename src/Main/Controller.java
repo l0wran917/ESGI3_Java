@@ -1,15 +1,20 @@
+package Main;
+
 import Config.ConfigController;
+
+import javax.naming.spi.DirectoryManager;
+import java.awt.*;
 
 public class Controller {
 
     public static void main(String[] args) {
         ConfigController conf = new ConfigController();
-        new Controller();
     }
 
-    public Controller() {
-        Simulation sim = new Simulation();
-        Render rend = new Render();
+    public Controller(Dimension windowsSize, Point anthillPosition, int antsCount, int foodCount) {
+
+        Simulation sim = new Simulation(windowsSize, anthillPosition, antsCount, foodCount);
+        Render rend = new Render(windowsSize);
         boolean isRunning = true;
 
         while (isRunning) {
@@ -17,7 +22,7 @@ public class Controller {
             rend.paint(sim);
 
             try {
-                Thread.sleep(50);
+                Thread.sleep(5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
