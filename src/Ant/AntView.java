@@ -12,7 +12,6 @@ public class AntView extends JPanel{
 
         this.setSize(10, 10);
         this.setLocation(ant.getPosition());
-        this.setBackground(new Color(129, 226, 142));
     }
 
     @Override
@@ -21,7 +20,9 @@ public class AntView extends JPanel{
 
         graphics.fillOval(0, 0, 10, 10);
         if(ant.getHasFood()){
-            graphics.fillOval(2, 2, 6, 6);
+            graphics.setColor(Color.red);
+            graphics.fillOval(3, 3, 4, 4);
+            graphics.setColor(Color.black);
         }
     }
 }
