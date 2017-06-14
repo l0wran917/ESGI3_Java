@@ -17,6 +17,7 @@ public class Controller {
         Render rend = new Render(windowsSize);
         boolean isRunning = true;
 
+        rend.init(sim);
         while (isRunning) {
             sim.nextStep();
             rend.paint(sim);

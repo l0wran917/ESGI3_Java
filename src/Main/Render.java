@@ -7,12 +7,9 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 
-import Ant.AntView;
 import Ant.Anthill;
-import Ant.AnthillView;
 
 import Food.Food;
-import Food.FoodView;
 
 public class Render extends JFrame {
 
@@ -28,27 +25,29 @@ public class Render extends JFrame {
         this.setVisible(true);
     }
 
-    public void paint(Simulation sim) {
-        this.paintAnts(sim.getAnts());
-        this.paintAnthill(sim.getAnthill());
-        this.paintFood(sim.getFood());
+    public void init(Simulation sim) {
+        this.initAnts(sim.getAnts());
+        this.initAnthill(sim.getAnthill());
+        this.initFood(sim.getFood());
+    }
 
+    public void paint(Simulation sim){
         this.repaint();
     }
 
-    private void paintAnts(List<Ant> ants) {
+    private void initAnts(List<Ant> ants) {
         for (Ant ant : ants) {
             JPanel view = ant.getView();
             this.add(view);
         }
     }
 
-    private void paintAnthill(Anthill anthill) {
+    private void initAnthill(Anthill anthill) {
         JPanel view = anthill.getView();
         this.add(view);
     }
 
-    private void paintFood(HashMap<Point, Food> foodList){
+    private void initFood(HashMap<Point, Food> foodList){
 
         for (Point position: foodList.keySet()) {
             Food food = foodList.get(position);
