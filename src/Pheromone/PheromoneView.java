@@ -16,18 +16,19 @@ public class PheromoneView extends JPanel {
 
     @Override
     protected void paintComponent(Graphics graphics) {
-        int alpha = (this.pheromone.getDurability() * 255) / this.pheromone.getDurability();
-        this.pheromone.uncrementDurability();
+        if (this.pheromone.getDurability() > 0) {
+            int alpha = (this.pheromone.getDurability() * 255) / this.pheromone.getDurability();
+            this.pheromone.uncrementDurability();
 
-        if (alpha > 255) {
-            alpha = 255;
-        } else if (alpha < 0) {
-            alpha = 0;
+            if (alpha > 255) {
+                alpha = 255;
+            } else if (alpha < 0) {
+                alpha = 0;
+            }
+            this.setBackground(new Color(255, 0, 0, alpha));
+
+            this.setLocation(pheromone.getPosition());
+            super.paintComponent(graphics);
         }
-        System.out.println(1);
-        this.setBackground(new Color(255, 0, 0, alpha));
-
-        this.setLocation(pheromone.getPosition());
-        super.paintComponent(graphics);
     }
 }

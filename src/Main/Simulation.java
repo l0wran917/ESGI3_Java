@@ -76,8 +76,8 @@ public class Simulation {
     private void displayPheromone(Ant ant){
         Point position = ant.getPosition();
         if (ant.getHasFood()) {
-            Pheromone phero = new Pheromone(position, 10);
-            pheromones.put(position, phero);
+            Pheromone pheromone = new Pheromone(position, 500);
+            pheromones.put(position, pheromone);
         }
     }
 

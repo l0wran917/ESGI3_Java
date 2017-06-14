@@ -43,7 +43,6 @@ public class RandomDeplacement implements IAntDeplacement {
         int value = move.x * move.x - move.y * move.y;
         if(value < 15){
             ant.setHasFood(false);
-            System.out.println("+1 food");
         }
 
         if(move.x > 0) {
