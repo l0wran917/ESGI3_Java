@@ -1,14 +1,11 @@
 package Main;
 
 import Ant.Ant;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
-
 import Ant.Anthill;
-
 import Food.Food;
 import Pheromone.Pheromone;
 
@@ -30,6 +27,9 @@ public class Render extends JFrame {
         this.initAnts(sim.getAnts());
         this.initAnthill(sim.getAnthill());
         this.initFood(sim.getFood());
+
+        this.revalidate();
+        this.repaint();
     }
 
     public void paint(Simulation sim){

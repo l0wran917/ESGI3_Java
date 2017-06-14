@@ -66,6 +66,7 @@ public class Simulation {
 
     private void checkAntFoundFood(Ant ant) {
         Point position = ant.getPosition();
+
         Food food = this.food.get(position);
         if (food != null) {
             food.removeQty();
