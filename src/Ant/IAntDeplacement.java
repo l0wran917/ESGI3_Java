@@ -1,5 +1,5 @@
 package Ant;
 
 public interface IAntDeplacement {
-    public void move(Ant ant);
+    public void move(Ant ant, Anthill anthill);
 }
