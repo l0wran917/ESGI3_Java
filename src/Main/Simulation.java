@@ -19,7 +19,6 @@ public class Simulation {
     private HashMap<Point, Food> food;
     private HashMap<Point, Pheromone> pheromones;
     private Anthill anthill;
-    private IAntDeplacement antBehaviour;
     private Random random;
 
     public Simulation(Dimension windowSize, Point anthillPosition, int antsCount, int foodCount) {
@@ -27,7 +26,6 @@ public class Simulation {
         this.food = new HashMap<Point, Food>();
         this.pheromones = new HashMap<Point, Pheromone>();
         this.anthill = new Anthill(anthillPosition);
-        this.antBehaviour = new RandomDeplacement(windowSize);
         this.random = new Random();
 
         this.initAnts(antsCount, windowSize);
@@ -37,7 +35,7 @@ public class Simulation {
     public void initAnts(int antsCount, Dimension windowSize) {
         for (int i = 0; i < antsCount; i++) {
             Point position = new Point(random.nextInt(windowSize.width), random.nextInt(windowSize.height));
-            Ant ant = new Ant(position);
+            Ant ant = new Ant(position, windowSize);
             this.ants.add(ant);
         }
     }
@@ -57,7 +55,7 @@ public class Simulation {
 
     private void moveAnts() {
         for (Ant ant : this.ants) {
-            ant.move(this.antBehaviour);
+            ant.move(this.anthill);
             checkAntFoundFood(ant);
         }
     }

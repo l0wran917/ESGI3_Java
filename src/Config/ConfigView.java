@@ -65,7 +65,7 @@ public class ConfigView extends JFrame implements ActionListener {
 
         Dimension windowSize = new Dimension(800, 600);
         Point anthillPosition = new Point(Integer.parseInt(inputAnthillPositionX.getText()), Integer.parseInt(inputAnthillPositionY.getText()));
-        int foodCount = 10;
+        int foodCount = 50;
         int antsCount = Integer.parseInt(this.inputAntCount.getText());
         int explorationSpeed = 1000;
 
