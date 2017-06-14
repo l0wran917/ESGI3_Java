@@ -5,6 +5,7 @@ import Ant.Ant;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Random;
 
 import Ant.Anthill;
@@ -13,6 +14,8 @@ import Ant.RandomDeplacement;
 import Pheromone.Pheromone;
 
 import Food.Food;
+
+import javax.swing.*;
 
 public class Simulation {
     private LinkedList<Ant> ants;
@@ -57,6 +60,7 @@ public class Simulation {
         for (Ant ant : this.ants) {
             ant.move(this.anthill);
             checkAntFoundFood(ant);
+            displayPheromone(ant);
         }
     }
 
@@ -66,6 +70,20 @@ public class Simulation {
         if (food != null) {
             food.removeQty();
             ant.setHasFood(true);
+        }
+    }
+
+    private void displayPheromone(Ant ant){
+        Point position = ant.getPosition();
+        if (ant.getHasFood()) {
+            Pheromone phero = new Pheromone(position, 10);
+            pheromones.put(position, phero);
+        }
+    }
+
+    private void decreasePheromone() {
+        for (Point position: pheromones.keySet()) {
+            pheromones.get(position).uncrementDurability();
         }
     }
 
@@ -87,5 +105,6 @@ public class Simulation {
 
     public void nextStep() {
         this.moveAnts();
+        this.decreasePheromone();
     }
 }
