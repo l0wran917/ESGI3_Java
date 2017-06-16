@@ -33,7 +33,6 @@ public class Render extends JFrame {
     }
 
     public void paint(Simulation sim){
-        this.initPheromone(sim.getPheromones());
         this.repaint();
     }
 
@@ -56,6 +55,10 @@ public class Render extends JFrame {
             JPanel view = food.getView();
             this.add(view);
         }
+    }
+
+    public void addPheromone(Pheromone pheromone){
+        this.add(pheromone.getView());
     }
 
     private void initPheromone(HashMap<Point, Pheromone> pheromoneList) {

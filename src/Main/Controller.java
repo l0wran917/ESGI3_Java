@@ -1,11 +1,15 @@
 package Main;
 
 import Config.ConfigController;
+import Pheromone.Pheromone;
 
 import javax.naming.spi.DirectoryManager;
 import java.awt.*;
 
 public class Controller {
+
+    private Render render;
+    private Simulation simulation;
 
     public static void main(String[] args) {
         ConfigController conf = new ConfigController();
@@ -13,14 +17,14 @@ public class Controller {
 
     public Controller(Dimension windowsSize, Point anthillPosition, int antsCount, int foodCount) {
 
-        Simulation sim = new Simulation(windowsSize, anthillPosition, antsCount, foodCount);
-        Render rend = new Render(windowsSize);
+        this.render = new Render(windowsSize);
+        this.simulation = new Simulation(windowsSize, anthillPosition, antsCount, foodCount, this);
         boolean isRunning = true;
 
-        rend.init(sim);
+        render.init(simulation);
         while (isRunning) {
-            sim.nextStep();
-            rend.paint(sim);
+            simulation.nextStep();
+            render.paint(simulation);
 
             try {
                 Thread.sleep(5);
@@ -28,6 +32,10 @@ public class Controller {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void addPheromone(Pheromone pheromone){
+        this.render.addPheromone(pheromone);
     }
 
 }
