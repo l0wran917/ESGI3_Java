@@ -29,7 +29,7 @@ public class Controller {
             render.paint(simulation);
 
             try {
-                Thread.sleep(5);
+                Thread.sleep(3);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

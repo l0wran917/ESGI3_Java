@@ -75,7 +75,7 @@ public class Simulation {
         Point position = ant.getPosition();
 
         Food food = this.food.get(position);
-        if (food != null) {
+        if (food != null && food.getQty() > 0) {
             food.removeQty();
             ant.setHasFood(true);
         }
@@ -92,14 +92,6 @@ public class Simulation {
             pheromone.addDurability();
         }
     }
-
-    /*
-    private void decreasePheromone() {
-        for (Point position: pheromones.keySet()) {
-            pheromones.get(position).uncrementDurability();
-        }
-    }
-    */
 
     public HashMap<Point, Pheromone> getPheromones() {
         return this.pheromones;
@@ -119,6 +111,5 @@ public class Simulation {
 
     public void nextStep() {
         this.moveAnts();
-        //this.decreasePheromone();
     }
 }

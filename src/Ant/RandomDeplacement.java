@@ -40,7 +40,7 @@ public class RandomDeplacement implements IAntDeplacement {
         move.x = destination.x - source.x;
         move.y = destination.y - source.y;
 
-        int value = move.x * move.x - move.y * move.y;
+        int value = Math.abs((move.x * move.x) - (move.y * move.y));
         if(value < 15){
             ant.setHasFood(false);
         }
