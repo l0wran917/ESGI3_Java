@@ -4,6 +4,8 @@ import Ant.Ant;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,11 +13,9 @@ import Ant.Anthill;
 
 import Food.Food;
 
-public class Render extends JFrame {
+public class Render extends JFrame implements WindowListener {
 
     public Render(Dimension size) {
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         this.setTitle("Simulation");
         this.setSize(size.width, size.height);
         this.setPreferredSize(size);
@@ -23,6 +23,8 @@ public class Render extends JFrame {
         this.setLocation(new Point(400, 100));
 
         this.setVisible(true);
+
+
     }
 
     public void init(Simulation sim) {
@@ -54,6 +56,41 @@ public class Render extends JFrame {
             JPanel view = food.getView();
             this.add(view);
         }
+
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        //this.
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
 
     }
 }
