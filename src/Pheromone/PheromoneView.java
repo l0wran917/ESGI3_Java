@@ -25,7 +25,7 @@ public class PheromoneView extends JPanel {
             } else if (alpha < 0) {
                 alpha = 0;
             }
-            this.setBackground(new Color(255, 0, 0, alpha));
+            this.setBackground(new Color(0, 0, 255, alpha));
 
             this.setLocation(pheromone.getPosition());
             super.paintComponent(graphics);

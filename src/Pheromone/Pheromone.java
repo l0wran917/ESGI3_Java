@@ -5,16 +5,21 @@ import Main.Model;
 import java.awt.*;
 
 public class Pheromone extends Model {
+    private static int defaultDurability = 2000;
     private int durability;
 
-    public Pheromone(Point position, int durability) {
+    public Pheromone(Point position) {
         super(position);
         this.view = new PheromoneView(this);
-        this.durability = durability;
+        this.durability = Pheromone.defaultDurability;
     }
 
     public void create() {
         this.durability = 10;
+    }
+
+    public void addDurability(){
+        this.durability += Pheromone.defaultDurability;
     }
 
     public void uncrementDurability() {

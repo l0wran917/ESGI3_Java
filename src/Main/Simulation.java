@@ -15,16 +15,21 @@ import Pheromone.Pheromone;
 
 import Food.Food;
 
+import javax.naming.ldap.Control;
 import javax.swing.*;
 
 public class Simulation {
+    private Controller controller;
+
     private LinkedList<Ant> ants;
     private HashMap<Point, Food> food;
     private HashMap<Point, Pheromone> pheromones;
     private Anthill anthill;
     private Random random;
 
-    public Simulation(Dimension windowSize, Point anthillPosition, int antsCount, int foodCount) {
+    public Simulation(Dimension windowSize, Point anthillPosition, int antsCount, int foodCount, Controller controller) {
+        this.controller = controller;
+
         this.ants = new LinkedList<Ant>();
         this.food = new HashMap<Point, Food>();
         this.pheromones = new HashMap<Point, Pheromone>();
@@ -60,12 +65,15 @@ public class Simulation {
         for (Ant ant : this.ants) {
             ant.move(this.anthill);
             checkAntFoundFood(ant);
-            displayPheromone(ant);
+            if (ant.getHasFood()) {
+                this.addPheromone(ant.getPosition());
+            }
         }
     }
 
     private void checkAntFoundFood(Ant ant) {
         Point position = ant.getPosition();
+
         Food food = this.food.get(position);
         if (food != null) {
             food.removeQty();
@@ -73,19 +81,25 @@ public class Simulation {
         }
     }
 
-    private void displayPheromone(Ant ant){
-        Point position = ant.getPosition();
-        if (ant.getHasFood()) {
-            Pheromone pheromone = new Pheromone(position, 500);
-            pheromones.put(position, pheromone);
+    private void addPheromone(Point position) {
+        Pheromone pheromone = this.pheromones.get(position);
+        if (pheromone == null) {
+            pheromone = new Pheromone(position);
+            this.pheromones.put(position, pheromone);
+
+            this.controller.addPheromone(pheromone);
+        } else {
+            pheromone.addDurability();
         }
     }
 
+    /*
     private void decreasePheromone() {
         for (Point position: pheromones.keySet()) {
             pheromones.get(position).uncrementDurability();
         }
     }
+    */
 
     public HashMap<Point, Pheromone> getPheromones() {
         return this.pheromones;
@@ -105,6 +119,6 @@ public class Simulation {
 
     public void nextStep() {
         this.moveAnts();
-        this.decreasePheromone();
+        //this.decreasePheromone();
     }
 }
