@@ -13,7 +13,11 @@ import Pheromone.Pheromone;
 
 public class Render extends JFrame implements WindowListener {
 
-    public Render(Dimension size) {
+    private Controller controller;
+
+    public Render(Dimension size, Controller controller) {
+        this.controller = controller;
+
         this.setTitle("Simulation");
         this.setSize(size.width, size.height);
         this.setPreferredSize(size);
@@ -21,8 +25,6 @@ public class Render extends JFrame implements WindowListener {
         this.setLocation(new Point(400, 100));
 
         this.setVisible(true);
-
-
     }
 
     public void init(Simulation sim) {
@@ -83,7 +85,7 @@ public class Render extends JFrame implements WindowListener {
 
     @Override
     public void windowClosed(WindowEvent e) {
-        //this.
+        this.controller.stop();
     }
 
     @Override

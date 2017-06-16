@@ -8,6 +8,8 @@ import java.awt.*;
 
 public class Controller {
 
+    private boolean isRunning;
+
     private Render render;
     private Simulation simulation;
 
@@ -17,12 +19,12 @@ public class Controller {
 
     public Controller(Dimension windowsSize, Point anthillPosition, int antsCount, int foodCount) {
 
-        this.render = new Render(windowsSize);
+        this.render = new Render(windowsSize, this);
         this.simulation = new Simulation(windowsSize, anthillPosition, antsCount, foodCount, this);
-        boolean isRunning = true;
+        this.isRunning = true;
 
         render.init(simulation);
-        while (isRunning) {
+        while (this.isRunning) {
             simulation.nextStep();
             render.paint(simulation);
 
@@ -36,6 +38,10 @@ public class Controller {
 
     public void addPheromone(Pheromone pheromone){
         this.render.addPheromone(pheromone);
+    }
+
+    public void stop(){
+        this.isRunning = false;
     }
 
 }

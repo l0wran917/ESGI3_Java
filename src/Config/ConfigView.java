@@ -216,6 +216,5 @@ public class ConfigView extends JFrame implements ActionListener, KeyListener {
         int explorationSpeed = Integer.parseInt(this.inputSpeed.getText());
 
         this.controller.startSimulation(windowSize, anthillPosition, antsCount, foodCount);
-        this.startBtn.setEnabled(false);
     }
 }
