@@ -18,6 +18,12 @@ public class Pheromone extends Model {
     }
 
     public void uncrementDurability() {
-        this.durability = this.durability - 1;
+        if (this.durability > 0) {
+            this.durability = this.durability - 1;
+        }
+    }
+
+    public int getDurability() {
+        return durability;
     }
 }

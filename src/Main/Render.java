@@ -10,6 +10,7 @@ import java.util.List;
 import Ant.Anthill;
 
 import Food.Food;
+import Pheromone.Pheromone;
 
 public class Render extends JFrame {
 
@@ -32,6 +33,7 @@ public class Render extends JFrame {
     }
 
     public void paint(Simulation sim){
+        this.initPheromone(sim.getPheromones());
         this.repaint();
     }
 
@@ -54,6 +56,13 @@ public class Render extends JFrame {
             JPanel view = food.getView();
             this.add(view);
         }
+    }
 
+    private void initPheromone(HashMap<Point, Pheromone> pheromoneList) {
+        for (Point position: pheromoneList.keySet()) {
+            Pheromone pheromone = pheromoneList.get(position);
+            JPanel view = pheromone.getView();
+            this.add(view);
+        }
     }
 }

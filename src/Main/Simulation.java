@@ -5,6 +5,7 @@ import Ant.Ant;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Random;
 
 import Ant.Anthill;
@@ -14,12 +15,13 @@ import Pheromone.Pheromone;
 
 import Food.Food;
 
+import javax.swing.*;
+
 public class Simulation {
     private LinkedList<Ant> ants;
     private HashMap<Point, Food> food;
     private HashMap<Point, Pheromone> pheromones;
     private Anthill anthill;
-    private IAntDeplacement antBehaviour;
     private Random random;
 
     public Simulation(Dimension windowSize, Point anthillPosition, int antsCount, int foodCount) {
@@ -27,7 +29,6 @@ public class Simulation {
         this.food = new HashMap<Point, Food>();
         this.pheromones = new HashMap<Point, Pheromone>();
         this.anthill = new Anthill(anthillPosition);
-        this.antBehaviour = new RandomDeplacement(windowSize);
         this.random = new Random();
 
         this.initAnts(antsCount, windowSize);
@@ -37,7 +38,7 @@ public class Simulation {
     public void initAnts(int antsCount, Dimension windowSize) {
         for (int i = 0; i < antsCount; i++) {
             Point position = new Point(random.nextInt(windowSize.width), random.nextInt(windowSize.height));
-            Ant ant = new Ant(position);
+            Ant ant = new Ant(position, windowSize);
             this.ants.add(ant);
         }
     }
@@ -57,8 +58,9 @@ public class Simulation {
 
     private void moveAnts() {
         for (Ant ant : this.ants) {
-            ant.move(this.antBehaviour);
+            ant.move(this.anthill);
             checkAntFoundFood(ant);
+            displayPheromone(ant);
         }
     }
 
@@ -68,6 +70,20 @@ public class Simulation {
         if (food != null) {
             food.removeQty();
             ant.setHasFood(true);
+        }
+    }
+
+    private void displayPheromone(Ant ant){
+        Point position = ant.getPosition();
+        if (ant.getHasFood()) {
+            Pheromone pheromone = new Pheromone(position, 500);
+            pheromones.put(position, pheromone);
+        }
+    }
+
+    private void decreasePheromone() {
+        for (Point position: pheromones.keySet()) {
+            pheromones.get(position).uncrementDurability();
         }
     }
 
@@ -89,5 +105,6 @@ public class Simulation {
 
     public void nextStep() {
         this.moveAnts();
+        this.decreasePheromone();
     }
 }
