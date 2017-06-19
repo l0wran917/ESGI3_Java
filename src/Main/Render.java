@@ -60,12 +60,4 @@ public class Render extends JFrame {
     public void addPheromone(Pheromone pheromone){
         this.add(pheromone.getView());
     }
-
-    private void initPheromone(HashMap<Point, Pheromone> pheromoneList) {
-        for (Point position: pheromoneList.keySet()) {
-            Pheromone pheromone = pheromoneList.get(position);
-            JPanel view = pheromone.getView();
-            this.add(view);
-        }
-    }
 }

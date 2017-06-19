@@ -3,10 +3,7 @@ package Main;
 import Ant.Ant;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import Ant.Anthill;
 import Ant.IAntDeplacement;
@@ -62,13 +59,34 @@ public class Simulation {
     }
 
     private void moveAnts() {
+        boolean onPheromone = false;
+        ArrayList<Point> arrayPosition = new ArrayList<>();
         for (Ant ant : this.ants) {
-            ant.move(this.anthill);
-            checkAntFoundFood(ant);
             if (ant.getHasFood()) {
                 this.addPheromone(ant.getPosition());
+            } else if (pheromones.get(ant.getPosition()) != null) {
+                arrayPosition = this.showDirection(ant.getPosition());
+            }
+            ant.move(this.anthill, arrayPosition);
+            checkAntFoundFood(ant);
+        }
+    }
+
+    private ArrayList<Point> showDirection(Point position) {
+        int i, j;
+        Point startedPosition = new Point(position);
+        ArrayList<Point> arrayPosition = new ArrayList<>();
+        for (i = -1; i < 2; i++) {
+            for (j = -1; j < 2; j++) {
+                position.x += i;
+                position.y += j;
+                if ((pheromones.get(position) != null) && (!position.equals(startedPosition))) {
+                    arrayPosition.add(new Point(position));
+                }
+                position = new Point(startedPosition);
             }
         }
+        return arrayPosition;
     }
 
     private void checkAntFoundFood(Ant ant) {
@@ -93,14 +111,6 @@ public class Simulation {
         }
     }
 
-    /*
-    private void decreasePheromone() {
-        for (Point position: pheromones.keySet()) {
-            pheromones.get(position).uncrementDurability();
-        }
-    }
-    */
-
     public HashMap<Point, Pheromone> getPheromones() {
         return this.pheromones;
     }
@@ -119,6 +129,5 @@ public class Simulation {
 
     public void nextStep() {
         this.moveAnts();
-        //this.decreasePheromone();
     }
 }

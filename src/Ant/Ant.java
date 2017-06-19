@@ -3,6 +3,7 @@ package Ant;
 import Main.Model;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Ant extends Model {
 
@@ -16,8 +17,8 @@ public class Ant extends Model {
         this.behaviour = new RandomDeplacement(windowSize);
     }
 
-    public void move(Anthill anthill) {
-        behaviour.move(this, anthill);
+    public void move(Anthill anthill, ArrayList<Point> positions) {
+        behaviour.move(this, anthill, positions);
     }
 
     public void setHasFood(boolean hasFood) {
