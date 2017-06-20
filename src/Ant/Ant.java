@@ -8,12 +8,16 @@ import java.util.ArrayList;
 public class Ant extends Model {
 
     private boolean hasFood;
+    private boolean onPheromone;
+    private Point oldPosition;
     private IAntDeplacement behaviour;
 
     public Ant(Point position, Dimension windowSize) {
         super(position);
         this.view = new AntView(this);
         this.hasFood = false;
+        this.onPheromone = false;
+        this.oldPosition = position;
         this.behaviour = new RandomDeplacement(windowSize);
     }
 
@@ -27,5 +31,21 @@ public class Ant extends Model {
 
     public boolean getHasFood() {
         return this.hasFood;
+    }
+
+    public void setOnPheromone(boolean onPheromone) {
+        this.onPheromone = onPheromone;
+    }
+
+    public boolean getOnPheromone() {
+        return this.onPheromone;
+    }
+
+    public void setOldPosition(Point oldPosition) {
+        this.oldPosition = oldPosition;
+    }
+
+    public Point getOldPosition() {
+        return this.oldPosition;
     }
 }

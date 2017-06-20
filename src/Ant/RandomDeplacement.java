@@ -8,7 +8,6 @@ public class RandomDeplacement implements IAntDeplacement {
 
     private Random random;
     private Dimension panel;
-
     private int oldDirection;
 
     public RandomDeplacement(Dimension panel) {
@@ -28,7 +27,7 @@ public class RandomDeplacement implements IAntDeplacement {
     public void move(Ant ant, Anthill anthill, ArrayList<Point> positions){
         if(ant.getHasFood()){
             goAnthill(ant, anthill);
-        } else if (!positions.isEmpty()) {
+        } else if ((!positions.isEmpty()) && (ant.getPosition() != anthill.getPosition())) {
             followPheromone(ant, positions);
         }else{
             explore(ant);
@@ -67,8 +66,10 @@ public class RandomDeplacement implements IAntDeplacement {
     }
 
     public void followPheromone(Ant ant, ArrayList<Point> positions) {
-        int randomIndex = random.nextInt(positions.size());
-        ant.setPosition(new Point(positions.get(randomIndex)));
+        int newPosition;
+        // If false, draw la
+        newPosition = random.nextInt(positions.size());
+        ant.setPosition(new Point(positions.get(newPosition)));
     }
 
     public void explore(Ant ant) {

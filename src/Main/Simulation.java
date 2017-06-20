@@ -59,20 +59,20 @@ public class Simulation {
     }
 
     private void moveAnts() {
-        boolean onPheromone = false;
         ArrayList<Point> arrayPosition = new ArrayList<>();
         for (Ant ant : this.ants) {
             if (ant.getHasFood()) {
                 this.addPheromone(ant.getPosition());
             } else if (pheromones.get(ant.getPosition()) != null) {
-                arrayPosition = this.showDirection(ant.getPosition());
+                arrayPosition = this.showDirection(ant);
             }
             ant.move(this.anthill, arrayPosition);
             checkAntFoundFood(ant);
         }
     }
 
-    private ArrayList<Point> showDirection(Point position) {
+    private ArrayList<Point> showDirection(Ant ant) {
+        Point position = ant.getPosition();
         int i, j;
         Point startedPosition = new Point(position);
         ArrayList<Point> arrayPosition = new ArrayList<>();
@@ -80,7 +80,11 @@ public class Simulation {
             for (j = -1; j < 2; j++) {
                 position.x += i;
                 position.y += j;
-                if ((pheromones.get(position) != null) && (!position.equals(startedPosition))) {
+                if ((pheromones.get(position) != null) && (!position.equals(startedPosition)) && (!position.equals(ant.getOldPosition()))) {
+                    if (ant.getOnPheromone() == true) {
+                        ant.setOldPosition(startedPosition);
+                    }
+                    ant.setOnPheromone(true);
                     arrayPosition.add(new Point(position));
                 }
                 position = new Point(startedPosition);
