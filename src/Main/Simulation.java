@@ -103,20 +103,34 @@ public class Simulation {
         Food food = this.food.get(position);
         if (food != null) {
             food.removeQty();
-            ant.setHasFood(true);
+            if (food.getQty() > 0) {
+                ant.setHasFood(true);
+            }
         }
     }
 
     private void addPheromone(Point position) {
         Pheromone pheromone = this.pheromones.get(position);
-        if (pheromone == null) {
-            pheromone = new Pheromone(position);
-            this.pheromones.put(position, pheromone);
 
-            this.controller.addPheromone(pheromone);
-        } else {
-            pheromone.addDurability();
+        Point move = new Point(0, 0);
+        Point destination = new Point(anthill.getPosition());
+        Point source = new Point(position);
+
+        move.x = destination.x - source.x;
+        move.y = destination.y - source.y;
+
+        int value = move.x * move.x - move.y * move.y;
+        if (value > 15) {
+            if (pheromone == null) {
+                pheromone = new Pheromone(position);
+                this.pheromones.put(position, pheromone);
+
+                this.controller.addPheromone(pheromone);
+            } else {
+                pheromone.addDurability();
+            }
         }
+
     }
 
     public HashMap<Point, Pheromone> getPheromones() {
