@@ -63,9 +63,10 @@ public class Simulation {
         for (Ant ant : this.ants) {
             if (ant.getHasFood()) {
                 this.addPheromone(ant.getPosition());
-            } else if (pheromones.get(ant.getPosition()) != null) {
-                arrayPosition = this.showDirection(ant);
             }
+
+            arrayPosition = this.showDirection(ant);
+
             ant.move(this.anthill, arrayPosition);
             checkAntFoundFood(ant);
         }
@@ -80,12 +81,15 @@ public class Simulation {
             for (j = -1; j < 2; j++) {
                 position.x += i;
                 position.y += j;
-                if ((pheromones.get(position) != null) && (!position.equals(startedPosition)) && (!position.equals(ant.getOldPosition()))) {
-                    if (ant.getOnPheromone() == true) {
+                Pheromone pheromone = pheromones.get(position);
+                if ((pheromone != null) && (!position.equals(startedPosition)) && (!position.equals(ant.getOldPosition()))) {
+                    if (ant.getOnPheromone()) {
                         ant.setOldPosition(startedPosition);
                     }
                     ant.setOnPheromone(true);
-                    arrayPosition.add(new Point(position));
+                    if (pheromone.getDurability() > 0) {
+                        arrayPosition.add(new Point(position));
+                    }
                 }
                 position = new Point(startedPosition);
             }
