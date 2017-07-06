@@ -61,7 +61,6 @@ public class Ant extends Model {
     }
 
     public boolean getForceExploration(){
-        System.out.println("Count : " + this.forceExploration);
         return this.forceExploration != 0;
     }
 }

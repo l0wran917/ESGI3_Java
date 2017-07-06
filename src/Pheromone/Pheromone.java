@@ -5,7 +5,8 @@ import Main.Model;
 import java.awt.*;
 
 public class Pheromone extends Model {
-    private static int defaultDurability = 2000;
+    private static int defaultDurability = 1000;
+    private static int durabilityAdded = 450;
     private int durability;
 
     public Pheromone(Point position) {
@@ -19,7 +20,9 @@ public class Pheromone extends Model {
     }
 
     public void addDurability(){
-        this.durability += Pheromone.defaultDurability;
+        if(this.durability < 1250){
+            this.durability += Pheromone.durabilityAdded;
+        }
     }
 
     public void uncrementDurability() {

@@ -32,8 +32,6 @@ public class RandomDeplacement implements IAntDeplacement {
         }else{
             explore(ant);
         }
-
-        System.out.println(ant.getForceExploration());
     }
 
     public void goAnthill(Ant ant, Anthill anthill){

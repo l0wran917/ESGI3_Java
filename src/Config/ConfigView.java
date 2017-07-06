@@ -63,11 +63,11 @@ public class ConfigView extends JFrame implements ActionListener, KeyListener {
         rowAntCountInput.setBackground(new Color(44, 62, 80));
         inputAntCount = new JTextField(14);
         inputAntCount.setHorizontalAlignment(JTextField.CENTER);
-        inputAntCount.setText("5");
+        inputAntCount.setText("50");
 
         inputFoodCount = new JTextField(14);
         inputFoodCount.setHorizontalAlignment(JTextField.CENTER);
-        inputFoodCount.setText("10");
+        inputFoodCount.setText("25");
 
         rowAntCountInput.add(inputAntCount, BorderLayout.WEST);
         rowAntCountInput.add(inputFoodCount, BorderLayout.EAST);
@@ -97,11 +97,11 @@ public class ConfigView extends JFrame implements ActionListener, KeyListener {
         rowAnthillPositionInput.setBackground(new Color(44, 62, 80));
         inputAnthillPositionX = new JTextField(10);
         inputAnthillPositionX.setHorizontalAlignment(JTextField.CENTER);
-        inputAnthillPositionX.setText("5");
+        inputAnthillPositionX.setText("15");
 
         inputAnthillPositionY = new JTextField(10);
         inputAnthillPositionY.setHorizontalAlignment(JTextField.CENTER);
-        inputAnthillPositionY.setText("5");
+        inputAnthillPositionY.setText("15");
 
         rowAnthillPosition.add(labelAnthillPosition);
         rowAnthillPositionInput.add(inputAnthillPositionX);
@@ -132,7 +132,7 @@ public class ConfigView extends JFrame implements ActionListener, KeyListener {
         rowSpeedPositionInput.setBackground(new Color(44, 62, 80));
         inputSpeed = new JTextField(10);
         inputSpeed.setHorizontalAlignment(JTextField.CENTER);
-        inputSpeed.setText("10000");
+        inputSpeed.setText("90");
 
         rowSpeedSize.add(labelSpeedPosition);
         rowSpeedPositionInput.add(inputSpeed);
@@ -215,6 +215,6 @@ public class ConfigView extends JFrame implements ActionListener, KeyListener {
         int antsCount = Integer.parseInt(this.inputAntCount.getText());
         int explorationSpeed = Integer.parseInt(this.inputSpeed.getText());
 
-        this.controller.startSimulation(windowSize, anthillPosition, antsCount, foodCount);
+        this.controller.startSimulation(windowSize, anthillPosition, antsCount, foodCount, explorationSpeed);
     }
 }

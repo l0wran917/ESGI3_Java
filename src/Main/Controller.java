@@ -17,7 +17,7 @@ public class Controller {
         ConfigController conf = new ConfigController();
     }
 
-    public Controller(Dimension windowsSize, Point anthillPosition, int antsCount, int foodCount) {
+    public Controller(Dimension windowsSize, Point anthillPosition, int antsCount, int foodCount, int explorationSpeed) {
 
         this.render = new Render(windowsSize, this);
         this.simulation = new Simulation(windowsSize, anthillPosition, antsCount, foodCount, this);
@@ -29,18 +29,18 @@ public class Controller {
             render.paint(simulation);
 
             try {
-                Thread.sleep(3);
+                Thread.sleep(100-explorationSpeed);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void addPheromone(Pheromone pheromone){
+    public void addPheromone(Pheromone pheromone) {
         this.render.addPheromone(pheromone);
     }
 
-    public void stop(){
+    public void stop() {
         this.isRunning = false;
     }
 
