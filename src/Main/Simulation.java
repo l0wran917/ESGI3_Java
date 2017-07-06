@@ -3,10 +3,7 @@ package Main;
 import Ant.Ant;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import Ant.Anthill;
 import Ant.IAntDeplacement;
@@ -62,13 +59,42 @@ public class Simulation {
     }
 
     private void moveAnts() {
+        ArrayList<Point> arrayPosition = new ArrayList<>();
         for (Ant ant : this.ants) {
-            ant.move(this.anthill);
-            checkAntFoundFood(ant);
             if (ant.getHasFood()) {
                 this.addPheromone(ant.getPosition());
             }
+
+            arrayPosition = this.showDirection(ant);
+
+            ant.move(this.anthill, arrayPosition);
+            checkAntFoundFood(ant);
         }
+    }
+
+    private ArrayList<Point> showDirection(Ant ant) {
+        Point position = ant.getPosition();
+        int i, j;
+        Point startedPosition = new Point(position);
+        ArrayList<Point> arrayPosition = new ArrayList<>();
+        for (i = -1; i < 2; i++) {
+            for (j = -1; j < 2; j++) {
+                position.x += i;
+                position.y += j;
+                Pheromone pheromone = pheromones.get(position);
+                if ((pheromone != null) && (!position.equals(startedPosition)) && (!position.equals(ant.getOldPosition()))) {
+                    if (ant.getOnPheromone()) {
+                        ant.setOldPosition(startedPosition);
+                    }
+                    ant.setOnPheromone(true);
+                    if (pheromone.getDurability() > 0) {
+                        arrayPosition.add(new Point(position));
+                    }
+                }
+                position = new Point(startedPosition);
+            }
+        }
+        return arrayPosition;
     }
 
     private void checkAntFoundFood(Ant ant) {
@@ -77,19 +103,32 @@ public class Simulation {
         Food food = this.food.get(position);
         if (food != null && food.getQty() > 0) {
             food.removeQty();
-            ant.setHasFood(true);
+            if (food.getQty() > 0) {
+                ant.setHasFood(true);
+            }
         }
     }
 
     private void addPheromone(Point position) {
         Pheromone pheromone = this.pheromones.get(position);
-        if (pheromone == null) {
-            pheromone = new Pheromone(position);
-            this.pheromones.put(position, pheromone);
 
-            this.controller.addPheromone(pheromone);
-        } else {
-            pheromone.addDurability();
+        Point move = new Point(0, 0);
+        Point destination = new Point(anthill.getPosition());
+        Point source = new Point(position);
+
+        move.x = destination.x - source.x;
+        move.y = destination.y - source.y;
+
+        int value = move.x * move.x - move.y * move.y;
+        if (value > 15) {
+            if (pheromone == null) {
+                pheromone = new Pheromone(position);
+                this.pheromones.put(position, pheromone);
+
+                this.controller.addPheromone(pheromone);
+            } else {
+                pheromone.addDurability();
+            }
         }
     }
 

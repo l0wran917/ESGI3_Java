@@ -1,13 +1,13 @@
 package Ant;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomDeplacement implements IAntDeplacement {
 
     private Random random;
     private Dimension panel;
-
     private int oldDirection;
 
     public RandomDeplacement(Dimension panel) {
@@ -24,9 +24,11 @@ public class RandomDeplacement implements IAntDeplacement {
         return (rand > tolerance);
     }
 
-    public void move(Ant ant, Anthill anthill){
+    public void move(Ant ant, Anthill anthill, ArrayList<Point> positions){
         if(ant.getHasFood()){
             goAnthill(ant, anthill);
+        } else if ((!positions.isEmpty()) && (ant.getPosition() != anthill.getPosition())) {
+            followPheromone(ant, positions);
         }else{
             explore(ant);
         }
@@ -61,6 +63,13 @@ public class RandomDeplacement implements IAntDeplacement {
         source.y += move.y;
 
         ant.setPosition(source);
+    }
+
+    public void followPheromone(Ant ant, ArrayList<Point> positions) {
+        int newPosition;
+        // If false, draw la
+        newPosition = random.nextInt(positions.size());
+        ant.setPosition(new Point(positions.get(newPosition)));
     }
 
     public void explore(Ant ant) {
