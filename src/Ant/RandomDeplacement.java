@@ -27,11 +27,13 @@ public class RandomDeplacement implements IAntDeplacement {
     public void move(Ant ant, Anthill anthill, ArrayList<Point> positions){
         if(ant.getHasFood()){
             goAnthill(ant, anthill);
-        } else if ((!positions.isEmpty()) && (ant.getPosition() != anthill.getPosition())) {
+        } else if ((!positions.isEmpty()) && !ant.getForceExploration()) {
             followPheromone(ant, positions);
         }else{
             explore(ant);
         }
+
+        System.out.println(ant.getForceExploration());
     }
 
     public void goAnthill(Ant ant, Anthill anthill){
@@ -67,7 +69,6 @@ public class RandomDeplacement implements IAntDeplacement {
 
     public void followPheromone(Ant ant, ArrayList<Point> positions) {
         int newPosition;
-        // If false, draw la
         newPosition = random.nextInt(positions.size());
         ant.setPosition(new Point(positions.get(newPosition)));
     }
@@ -131,8 +132,9 @@ public class RandomDeplacement implements IAntDeplacement {
         point.x += move.x;
         point.y += move.y;
 
-        this.oldDirection = direction;
+        ant.explored();
 
+        this.oldDirection = direction;
         ant.setPosition(point);
     }
 }

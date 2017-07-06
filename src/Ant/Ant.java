@@ -11,6 +11,7 @@ public class Ant extends Model {
     private boolean onPheromone;
     private Point oldPosition;
     private IAntDeplacement behaviour;
+    private int forceExploration;
 
     public Ant(Point position, Dimension windowSize) {
         super(position);
@@ -35,6 +36,10 @@ public class Ant extends Model {
 
     public void setOnPheromone(boolean onPheromone) {
         this.onPheromone = onPheromone;
+
+        if(!this.onPheromone){
+            this.forceExploration = 10;
+        }
     }
 
     public boolean getOnPheromone() {
@@ -47,5 +52,16 @@ public class Ant extends Model {
 
     public Point getOldPosition() {
         return this.oldPosition;
+    }
+
+    public void explored(){
+        if(this.forceExploration > 0){
+            this.forceExploration -= 1;
+        }
+    }
+
+    public boolean getForceExploration(){
+        System.out.println("Count : " + this.forceExploration);
+        return this.forceExploration != 0;
     }
 }

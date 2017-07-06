@@ -73,10 +73,11 @@ public class Simulation {
     }
 
     private ArrayList<Point> showDirection(Ant ant) {
-        Point position = ant.getPosition();
         int i, j;
+        Point position = ant.getPosition();
         Point startedPosition = new Point(position);
         ArrayList<Point> arrayPosition = new ArrayList<>();
+
         for (i = -1; i < 2; i++) {
             for (j = -1; j < 2; j++) {
                 position.x += i;
@@ -86,14 +87,19 @@ public class Simulation {
                     if (ant.getOnPheromone()) {
                         ant.setOldPosition(startedPosition);
                     }
-                    ant.setOnPheromone(true);
                     if (pheromone.getDurability() > 0) {
+                        ant.setOnPheromone(true);
                         arrayPosition.add(new Point(position));
                     }
                 }
                 position = new Point(startedPosition);
             }
         }
+
+        if (ant.getOnPheromone() && arrayPosition.isEmpty()) {
+            ant.setOnPheromone(false);
+        }
+
         return arrayPosition;
     }
 
