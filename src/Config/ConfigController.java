@@ -15,11 +15,11 @@ public class ConfigController {
         this.config = new ConfigModel();
     }
 
-    public void startSimulation(Dimension windowsSize, Point antihillPosition, int antsCount, int foodCount, int explorationSpeed) {
+    public void startSimulation(Dimension windowsSize, Point anthillPosition, int antsCount, int foodCount, int explorationSpeed) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                new Controller(windowsSize, antihillPosition, antsCount, foodCount, explorationSpeed);
+                new Controller(windowsSize, anthillPosition, antsCount, foodCount, explorationSpeed);
             }
         }).start();
     }
