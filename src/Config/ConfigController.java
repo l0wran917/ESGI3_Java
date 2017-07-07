@@ -16,16 +16,12 @@ public class ConfigController {
     }
 
     public void startSimulation(Dimension windowsSize, Point antihillPosition, int antsCount, int foodCount, int explorationSpeed) {
-
         new Thread(new Runnable() {
             @Override
             public void run() {
                 new Controller(windowsSize, antihillPosition, antsCount, foodCount, explorationSpeed);
             }
         }).start();
-
-        //new Main.Simulation(d, nbSourceFood, nbAnts, explorationSpeed); // TODO
-        //System.out.println(d + " " + nbSourceFood + " " + nbAnts + " " + explorationSpeed);
     }
 
 

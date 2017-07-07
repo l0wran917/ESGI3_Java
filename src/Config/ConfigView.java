@@ -132,7 +132,7 @@ public class ConfigView extends JFrame implements ActionListener, KeyListener {
         rowSpeedPositionInput.setBackground(new Color(44, 62, 80));
         inputSpeed = new JTextField(10);
         inputSpeed.setHorizontalAlignment(JTextField.CENTER);
-        inputSpeed.setText("90");
+        inputSpeed.setText("98");
 
         rowSpeedSize.add(labelSpeedPosition);
         rowSpeedPositionInput.add(inputSpeed);

@@ -15,10 +15,6 @@ public class Pheromone extends Model {
         this.durability = Pheromone.defaultDurability;
     }
 
-    public void create() {
-        this.durability = 10;
-    }
-
     public void addDurability(){
         if(this.durability < 1250){
             this.durability += Pheromone.durabilityAdded;

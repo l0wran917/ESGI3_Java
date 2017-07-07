@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Food extends Model {
 
-    private int maxQty = 150;
+    private int maxQty = 50;
 
     private int qty;
 
